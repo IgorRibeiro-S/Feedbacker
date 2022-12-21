@@ -11,9 +11,11 @@
 //  import { onMounted } from 'vue'
 //  import { useRouter } from 'vue-router'
 import ContactView from './ContactView.vue'
+import CustomHeader from './CustomHeader.vue'
 export default {
   components: {
-    ContactView
+    ContactView,
+    CustomHeader
   }
 /* data () {
     const router = useRouter()
