@@ -1,5 +1,8 @@
 <template>
-  <CustomHeader />
+  <CustomHeader
+  @create-account="handleAccountCreate"
+  @login="handleLogin"
+  />
   <ContactView />
   <div class="flex justify-center py-10 bg-brand-gray">
     <p class="font-medium text-center text-gray-800">
@@ -8,16 +11,16 @@
   </div>
 </template>
 <script>
-//  import { onMounted } from 'vue'
-//  import { useRouter } from 'vue-router'
+import { onMounted } from 'vue'
+import { useRouter } from 'vue-router'
 import ContactView from './ContactView.vue'
 import CustomHeader from './CustomHeader.vue'
 export default {
   components: {
     ContactView,
     CustomHeader
-  }
-/* data () {
+  },
+  data () {
     const router = useRouter()
 
     onMounted(() => {
@@ -27,9 +30,13 @@ export default {
       }
     })
 
-    function handleLogin() { }
+    function handleLogin () {}
+    function handleAccountCreate () {}
 
-    function handleAccountCreate() { }
-  },    */
+    return {
+      handleLogin,
+      handleAccountCreate
+    }
+  }
 }
 </script>
