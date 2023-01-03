@@ -1,7 +1,7 @@
 <template>
   <teleport to="body">
     <div v-if="state.isActive" class="fixed top-0 left-0 z-50 flex items-center justify-center w-full h-full bg-black bg-opacity-50" @click="handleModalToogle({ status: false})">
-        <div class="mt-10 fixed">
+        <div class="mt-10 fixed" :class="state.width" @click.stop>
             <div class="flex flex-col overflow-hidden bg-white rounded-lg animate__animated animate__fadeInDown animate__faster">
                 <div class="flex flex-col px-12 py-10 bg-white">
                     <component :is="state.component"/>
@@ -15,24 +15,45 @@
 
 <script>
 import { reactive } from '@vue/reactivity'
+import { defineAsyncComponent, onBeforeUnmount, onMounted } from '@vue/runtime-core'
+import useModal from '../../hooks/useModal'
+
+const ModalLogin = defineAsyncComponent(() => import('../ModalLogin/ModalLogin.vue'))
+const ModalCreateAccount = defineAsyncComponent(() => import('../ModalCreateAccount/ModalCreate.vue'))
 
 const DEFAULT_WIDTH = 'w-3/4 lg:w-1/3'
 export default {
-    data () {
-        const state = reactive({
-            isActive: false,
-            component: {},
-            props: {},
-            widht: DEFAULT_WIDTH
-        })
+  components: { ModalLogin, ModalCreateAccount },
+  data () {
+    const modal = useModal()
+    const state = reactive({
+      isActive: false,
+      component: {},
+      props: {},
+      widht: DEFAULT_WIDTH
+    })
 
-        function handleModalToogle ({ status }) {
+    onMounted(() => {
+      modal.listen(handleModalToogle)
+    })
 
-        }
+    onBeforeUnmount(() => {
+      modal.off(handleModalToogle)
+    })
+
+    function handleModalToogle (payload) {
+      if (payload.status) {
+        state.component = payload.component
+        state.props = payload.props
+        state.widht = payload.widht ?? DEFAULT_WIDTH
+      } else {
+        state.component = {}
+        state.props = {}
+        state.widht = DEFAULT_WIDTH
+      }
+      state.isActive = payload.status
     }
+    return { state, handleModalToogle }
+  }
 }
 </script>
-
-<style>
-
-</style>
