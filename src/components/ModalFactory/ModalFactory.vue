@@ -30,7 +30,7 @@ export default {
       isActive: false,
       component: {},
       props: {},
-      widht: DEFAULT_WIDTH
+      width: DEFAULT_WIDTH
     })
 
     onMounted(() => {
