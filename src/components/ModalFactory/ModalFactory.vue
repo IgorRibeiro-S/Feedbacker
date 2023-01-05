@@ -45,11 +45,11 @@ export default {
       if (payload.status) {
         state.component = payload.component
         state.props = payload.props
-        state.widht = payload.widht ?? DEFAULT_WIDTH
+        state.width = payload.width ?? DEFAULT_WIDTH
       } else {
         state.component = {}
         state.props = {}
-        state.widht = DEFAULT_WIDTH
+        state.width = DEFAULT_WIDTH
       }
       state.isActive = payload.status
     }
