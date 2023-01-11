@@ -6,8 +6,8 @@
           <img class="w-full" src="../../assets/logo_white.png" alt="logo">
         </div>
         <div class="flex">
-          <button @click= "() => emit('create-account')" class="px-6 py-2 text-center text-white font-bold bg-brand-main rounded-full focus:outline-none">Crie uma conta</button>
-          <button @click= "() => emit('login')" class="px-6 py-2 text-center text-brand-main font-bold bg-white rounded-full focus:outline-none">Entrar</button>
+          <button @click= "() => emit('create-account')" class="px-6 py-2 text-center text-white font-bold bg-brand-main rounded-full  focus:outline-none">Crie uma conta</button>
+          <button @click= "() => emit('login')" class="px-6 py-2 text-center hover:bg-blue-50 text-brand-main font-bold bg-white rounded-full focus:outline-none">Entrar</button>
         </div>
         </div>
         <div class="flex flex-col mt-28 ">

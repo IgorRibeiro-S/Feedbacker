@@ -11,11 +11,13 @@
   },
   "dependencies": {
     "animate.css": "^4.1.1",
+    "axios": "^1.2.2",
     "core-js": "^3.8.3",
     "tiny-emitter": "^2.1.0",
     "vee-validate": "^4.5.8",
     "vue": "^3.2.13",
-    "vue-router": "^4.0.3"
+    "vue-router": "^4.0.3",
+    "vue-toastification": "^2.0.0-rc.5"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
