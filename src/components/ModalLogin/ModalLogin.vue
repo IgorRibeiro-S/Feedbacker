@@ -14,7 +14,7 @@
          v-model= "state.email.value"
          placeholder="email@example.com"
          :class="{'border-brand-danger': !!state.email.errorMessage}"
-         class="block px-6 py-3 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded"
+         class="block w-96 px-3 py-2 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded"
          type="email">
         <span
           class="block font-medium text-brand-danger"
@@ -29,7 +29,7 @@
          v-model= "state.password.value"
          placeholder="Senha"
          :class="{'border-brand-danger': !!state.password.errorMessage}"
-         class="block px-6 py-2 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded "
+         class="block w-96 px-3 py-2 mt-1 text-lg bg-gray-100 border-2 border-transparent rounded "
          type="password">
         <span
           v-if= "!!state.password.errorMessage"
