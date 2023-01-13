@@ -6,7 +6,7 @@ import CredencialsView from '../views/Credencials/CredencialsView.vue'
 const routes = [
   {
     path: '/',
-    name: 'home',
+    name: 'Home',
     component: HomeView
   },
   {
