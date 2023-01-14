@@ -1,4 +1,4 @@
-import router from '@/router'
+import router from '../router'
 import axios from 'axios'
 import AuthService from './auth'
 import UserService from './users'
@@ -22,7 +22,12 @@ httpClient.interceptors.request.use(config => {
 })
 
 httpClient.interceptors.response.use((response) => response, (error) => {
-  // const canThrowAnError = error.request.status === 0 || error.request.status === 500
+  const canThrowAnError = error.request.status === 0 ||
+  error.request.status === 500
+
+  if (canThrowAnError) {
+    throw new Error(error.message)
+  }
   if (error.response.status === 401) {
     router.push({ name: 'Home' })
   }
