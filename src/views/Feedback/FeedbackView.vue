@@ -1,3 +1,13 @@
 <template>
-    <h1>feedbacks</h1>
+  <FeedbackHeaderView/>
 </template>
+<script>
+import FeedbackHeaderView from './FeedbackHeaderView.vue'
+
+export default {
+  components: {
+    FeedbackHeaderView
+  }
+}
+
+</script>

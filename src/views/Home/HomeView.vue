@@ -7,7 +7,7 @@
   <ContactView />
   <div class="flex justify-center py-10 bg-brand-gray">
     <p class="font-medium text-center text-gray-800">
-      Feedbacker &copy;2022 Copyright
+      Feedbacker &copy;2023 Copyright
     </p>
   </div>
 </div>
