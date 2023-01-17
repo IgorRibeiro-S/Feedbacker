@@ -102,9 +102,9 @@ export default {
         if (!errors) {
           window.localStorage.setItem('token', data.token)
           state.isLoading = false
+          toast.success('Login realizado com sucesso')
           router.push({ name: 'Feedback' })
           modal.close()
-          toast.success('Login realizado com sucesso')
           return
         }
         if (errors.status === 404) {

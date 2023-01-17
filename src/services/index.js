@@ -1,15 +1,16 @@
 // import router from '../router'
+import router from '@/router'
 import axios from 'axios'
 import AuthService from './auth'
 import UserService from './users'
 
 const API_ENV = {
-  production: '',
+  production: 'https://backend-feedbacker-vue.vercel.app/',
   local: 'http://localhost:3000'
 }
 
 const httpClient = axios.create({
-  baseURL: API_ENV.local
+  baseURL: API_ENV[process.env.NODE_ENV] ?? API_ENV.local
 })
 
 httpClient.interceptors.request.use(config => {
@@ -29,7 +30,7 @@ httpClient.interceptors.response.use((response) => response, (error) => {
     throw new Error(error.message)
   }
   if (error.response.status === 401) {
-    console.log('erro token')
+    router.push({ name: 'Home' })
   }
   return error
 })
