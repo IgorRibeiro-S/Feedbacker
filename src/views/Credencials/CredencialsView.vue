@@ -27,13 +27,16 @@
             <div
              v-else
              class="flex py-3 pl-5 mt-2 justify-beteween items-center bg-brand-gray rounded-md w-full lg:w-1/2">
-                <span>
+                <span  v-if="state.hasErrors">
+                  Erro ao carregar o ApiKey
+                </span>
+                <span v-else>
                     {{ store.User.currentUser.apiKey }}
                 </span>
                 <div class="flex ml-28 mr-5">
                   <span>
                   <svg
-                @click="handleCopy()" class="cursor-pointer"
+                @click="handleCopy()" v-if="!state.hasErrors" class="cursor-pointer"
                 width="28" height="28"
                 viewBox="0 0 19 22"
                 fill="none"
@@ -44,7 +47,9 @@
                 </svg>
                 </span>
                 <span>
-                  <svg class="ml-4 cursor-pointer"
+                  <svg
+                  @click="handleGenerateApi"
+                  class="ml-4 cursor-pointer"
                   width="28"
                   height="28"
                   viewBox="0 0 17 23"
@@ -68,12 +73,15 @@
             <div
             v-else
             class="flex py-3 pl-5 pr-20 mt-2 bg-brand-gray rounded-md w-full lg:w-2/3">
-              <div class="overflow-x-scroll">
+            <span v-if="state.hasErrors">
+              Erro ao carregar o Script!
+            </span>
+              <div v-else class="overflow-x-scroll">
               <pre>&lt;script src="https://igorribeiro-s-feedbacker-widget.netlify.app?api_key={{ store.User.currentUser.apiKey }}"&gt;&lt;script&gt;</pre>
             </div>
             <span>
               <svg
-                @click="handleCopy()" class="ml-20 mr-5 cursor-pointer"
+                @click="handleCopy()" v-if="!state.hasErrors" class="ml-20 mr-5 cursor-pointer"
                 width="28" height="28"
                 viewBox="0 0 19 22"
                 fill="none"
@@ -93,6 +101,9 @@ import ContentLoader from '../../components/ContentLoader/ContentLoad.vue'
 import { useToast } from 'vue-toastification'
 import useStore from '../../hooks/userStore'
 import { reactive } from '@vue/reactivity'
+import services from '../../services'
+import { setApiKey } from '../../store/users'
+import { watch } from '@vue/runtime-core'
 export default {
   components: {
     CredencialHeader,
@@ -102,8 +113,31 @@ export default {
     const toast = useToast()
     const store = useStore()
     const state = reactive({
+      hasErrors: false,
       isLoading: false
     })
+    watch(() => store.User.currentUser, () => {
+      if (!store.Global.isLoading && !store.User.currentUser.apiKey) {
+        handleError(true)
+      }
+    })
+
+    async function handleError (error) {
+      state.isLoading = false
+      state.hasErrors = !!error
+    }
+
+    async function handleGenerateApi () {
+      try {
+        state.isLoading = true
+        const { data } = await services.users.generateApiKey()
+        setApiKey(data.apiKey)
+        state.isLoading = false
+      } catch (error) {
+        handleError(error)
+      }
+    }
+
     async function handleCopy () {
       toast.clear()
       try {
@@ -117,7 +151,8 @@ export default {
     return {
       handleCopy,
       store,
-      state
+      state,
+      handleGenerateApi
     }
   }
 }
