@@ -28,15 +28,16 @@
 <script>
 import { computed } from '@vue/runtime-core'
 import { useRouter } from 'vue-router'
+import useStore from '../../hooks/userStore'
 export default {
   setup () {
     const router = useRouter()
-    const store = 'Igor Ribeiro'
+    const store = useStore('User')
     const logoutLabel = computed(() => {
       if (!store) {
         return '...'
       }
-      return `${store} (sair)`
+      return `${store.currentUser.name} (sair)`
     })
 
     function handleLogout () {
