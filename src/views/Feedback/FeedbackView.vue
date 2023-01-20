@@ -10,6 +10,17 @@
           Detalhes de todos os feedbacks recebidos.
         </p>
     </div>
+    <div class="flex justify-center w-full pb-20">
+      <div class="w-4/5 max-w-6xl py-10 grid grid-col-2 gap-2">
+      <div>
+        <h1 class="font-black text-3xl text-brand-darkgray">
+          Listagem
+          </h1>
+      </div>
+      <div class="px-10 pt-20 col-span-3"></div>
+
+      </div>
+    </div>
 </template>
 <script>
 import CredencialHeader from '../Credencials/CredencialHeader.vue'
