@@ -77,11 +77,11 @@
               Erro ao carregar o Script!
             </span>
               <div v-else class="overflow-x-scroll">
-              <pre>&lt;script src="https://igorribeiro-s-feedbacker-widget.netlify.app?api_key={{ store.User.currentUser.apiKey }}"&gt;&lt;script&gt;</pre>
+              <pre id="scriptCopy">&lt;script src="https://igorribeiro-s-feedbacker-widget.netlify.app?api_key={{ store.User.currentUser.apiKey }}"&gt;&lt;script&gt;</pre>
             </div>
             <span>
               <svg
-                @click="handleCopy()" v-if="!state.hasErrors" class="ml-20 mr-5 cursor-pointer"
+                @click="handleCopyScript()" v-if="!state.hasErrors" class="ml-20 mr-5 cursor-pointer"
                 width="28" height="28"
                 viewBox="0 0 19 22"
                 fill="none"
@@ -148,11 +148,21 @@ export default {
       }
     }
 
+    async function handleCopyScript () {
+      toast.clear()
+      try {
+        await navigator.clipboard.writeText(document.getElementById('scriptCopy').innerText)
+        toast.success('Copiado!')
+      } catch (error) {
+        console.log(error)
+      }
+    }
     return {
       handleCopy,
       store,
       state,
-      handleGenerateApi
+      handleGenerateApi,
+      handleCopyScript
     }
   }
 }
