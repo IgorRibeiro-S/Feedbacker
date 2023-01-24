@@ -16,19 +16,24 @@
         <h1 class="font-black text-3xl text-brand-darkgray">
           Listagem
           </h1>
+          <suspense>
+            <template>
+              <FiltersView/>
+            </template>
+            </suspense>
       </div>
       <div class="px-10 pt-20 col-span-3"></div>
-
       </div>
     </div>
 </template>
 <script>
 import CredencialHeader from '../Credencials/CredencialHeader.vue'
-// import services from '../../services/feedbacks'
+import FiltersView from './FiltersView.vue'
 
 export default {
   components: {
-    CredencialHeader
+    CredencialHeader,
+    FiltersView
   },
   setup () {
 
