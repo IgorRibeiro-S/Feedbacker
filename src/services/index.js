@@ -6,12 +6,12 @@ import UserService from './users'
 import { setGlobalLoading } from '../store/global'
 
 const API_ENV = {
-  production: 'https://backend-feedbacker-vue.vercel.app/',
+  production: '',
   local: 'http://localhost:3000'
 }
 
 const httpClient = axios.create({
-  baseURL: API_ENV[process.env.NODE_ENV] ?? API_ENV.local
+  baseURL: API_ENV.local
 })
 
 httpClient.interceptors.request.use(config => {

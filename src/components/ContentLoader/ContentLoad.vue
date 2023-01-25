@@ -50,7 +50,7 @@ export default {
 <style lang="postcss" scoped>
 @keyframes shimmer {
     100% {
-        transform: translateX(100%)
+        transform: translateX(100%);
     }
 }
 .content-loader {

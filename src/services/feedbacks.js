@@ -1,3 +1,8 @@
+const defaultPagination = {
+  limit: 5,
+  offset: 0
+}
+
 export default httpClient => ({
     getAll: async ({ type, limit, offset } = defaultPagination) => {
       const query  = { limit, offset }
@@ -11,15 +16,12 @@ export default httpClient => ({
     },
   
     getSumary: async () => {
-      const response = await httpClient.get('/feedbacks/sumary')
+      const response = await httpClient.get('/feedbacks/summary')
         return {
           data: response.data
       }
     }
   })
-  const defaultPagination = {
-    limit: 5,
-    offset: 0
-  }
+
   
   

@@ -17,10 +17,17 @@
           Listagem
           </h1>
           <suspense>
-            <template>
-              <FiltersView/>
-            </template>
-            </suspense>
+          <template #default>
+            <FiltersView
+              class="mt-8 animate__animated animate__fadeIn animate__faster"
+            />
+          </template>
+          <template #fallback>
+            <h3 class="mt-3 text-lg text-brand-darkgray font-medium">
+              loading ...
+            </h3>
+          </template>
+        </suspense>
       </div>
       <div class="px-10 pt-20 col-span-3"></div>
       </div>
