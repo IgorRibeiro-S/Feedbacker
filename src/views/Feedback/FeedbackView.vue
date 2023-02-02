@@ -23,27 +23,57 @@
             />
           </template>
           <template #fallback>
-            <h3 class="mt-3 text-lg text-brand-darkgray font-medium">
-              loading ...
-            </h3>
+            <LoadingFeedback class="mt-8"/>
           </template>
         </suspense>
       </div>
-      <div class="px-10 pt-20 col-span-3"></div>
+      <div class="px-10 pt-20 col-span-3">
+          <p
+          v-if="state.hasError"
+          class="text-lg text-center text-gray-800 font-regular">
+          Ocorreu um erro ao carregar os feedbacks😥
+          </p>
+          <p
+          v-if="!state.feedbacks.length && !state.isLoading"
+          class="text-lg text-center text-gray-800 font-regular">
+          Nenhum registro de feedback 😉
+          </p>
+           <LoadingFeedback v-if="state.isLoading"/>
+          <FeedbackCard
+          v-else
+          v-for="(feedback, index) in state.feedbacks"
+          :key="feedback.id"
+          :is-opened="index === 0"
+          :feedback="feedback"
+          class="mb-8"
+          />
+      </div>
       </div>
     </div>
 </template>
 <script>
+import { reactive } from '@vue/reactivity'
 import CredencialHeader from '../Credencials/CredencialHeader.vue'
 import FiltersView from './FiltersView.vue'
+import LoadingFeedback from './LoadingFeedback.vue'
+import FeedbackCard from './FeedbackCard'
 
 export default {
   components: {
     CredencialHeader,
-    FiltersView
+    FiltersView,
+    LoadingFeedback,
+    FeedbackCard
   },
   setup () {
-
+    const state = reactive({
+      hasError: false,
+      feedbacks: ['text'],
+      isLoading: false
+    })
+    return {
+      state
+    }
   }
 }
 
