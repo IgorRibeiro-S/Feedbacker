@@ -1,14 +1,17 @@
 <template>
   <div
   @click="handleToggle"
-  class="flex flex-col bg-gray-200 rounded px-8 py-6 cursor-pointer ">
+  class="flex flex-col bg-gray-200 rounded-lg px-8 py-6 cursor-pointer ">
   <div
     class="flex justify-between items-center w-full mb-8">
     <BadgeFeedback :type="feedback.type"/>
   <span class="font-regular text-brand-graydark">
     {{ feedback.createdAt }}
   </span>
-  <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, eligendi? Praesentium distinctio nam facilis odio architecto voluptatum! Dolorem expedita similique provident, suscipit quam, doloribus exercitationem repellat in fugiat ipsa modi.</h1>
+  </div>
+  <div class="text-lg text-gray-800 font-regular">
+    {{ feedback.text }}
+    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Laboriosam ex eos deserunt sit, fuga eum animi accusamus corrupti possimus maxime in suscipit repellat officia. Aliquid odio eum perferendis neque sapiente?</p>
   </div>
   </div>
 </template>
