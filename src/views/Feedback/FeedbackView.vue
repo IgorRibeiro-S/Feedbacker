@@ -11,7 +11,7 @@
         </p>
     </div>
     <div class="flex justify-center w-full pb-20">
-      <div class="w-4/5 max-w-6xl py-10 grid grid-col-2 gap-2">
+      <div class="w-4/5 max-w-6xl py-10 grid grid-cols-4 gap-2">
       <div>
         <h1 class="font-black text-3xl text-brand-darkgray">
           Listagem
@@ -57,6 +57,8 @@ import CredencialHeader from '../Credencials/CredencialHeader.vue'
 import FiltersView from './FiltersView.vue'
 import LoadingFeedback from './LoadingFeedback.vue'
 import FeedbackCard from './FeedbackCard'
+import services from '../../services'
+import { onMounted } from '@vue/runtime-core'
 
 export default {
   components: {
@@ -69,10 +71,39 @@ export default {
     const state = reactive({
       hasError: false,
       feedbacks: ['text'],
+      currentFeedbackType: '',
+      pagination: {
+        limit: 5,
+        offset: 0
+      },
       isLoading: false
     })
+    onMounted(() => {
+      fecthFeedbacks()
+    })
+    function handleErrors (error) {
+      state.hasError = !!error
+    }
+
+    async function fecthFeedbacks () {
+      try {
+        state.isLoading = true
+        const { data } = await services.users.getAll({
+          ...state.pagination,
+          type: state.currentFeedbackType
+        })
+
+        state.feedbacks = data.results
+        state.pagination = data.pagination
+        state.isLoading = false
+      } catch (error) {
+        handleErrors(error)
+      }
+    }
+
     return {
-      state
+      state,
+      fecthFeedbacks
     }
   }
 }

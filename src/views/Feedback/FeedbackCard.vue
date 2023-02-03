@@ -8,7 +8,7 @@
   <span class="font-regular text-brand-graydark">
     {{ feedback.createdAt }}
   </span>
-    <h1>lorememememememememememememememememasdwfwf</h1>
+  <h1>Lorem ipsum dolor sit amet consectetur adipisicing elit. Placeat, eligendi? Praesentium distinctio nam facilis odio architecto voluptatum! Dolorem expedita similique provident, suscipit quam, doloribus exercitationem repellat in fugiat ipsa modi.</h1>
   </div>
   </div>
 </template>
