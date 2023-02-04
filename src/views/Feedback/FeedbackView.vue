@@ -19,6 +19,7 @@
           <suspense>
           <template #default>
             <FiltersView
+              @select="ChangeFeedbackType"
               class="mt-8 animate__animated animate__fadeIn animate__faster"
             />
           </template>
@@ -38,7 +39,7 @@
           class="text-lg text-center text-gray-800 font-regular">
           Nenhum registro de feedback 😉
           </p>
-           <LoadingFeedback v-if="state.isLoading"/>
+           <LoadingFeedback v-if="state.isLoading || state.isLoadingFeedbacks"/>
           <FeedbackCard
           v-else
           v-for="(feedback, index) in state.feedbacks"
@@ -76,12 +77,31 @@ export default {
         limit: 5,
         offset: 0
       },
-      isLoading: false
+      isLoading: false,
+      isLoadingFeedbacks: false
     })
     onMounted(() => {
       fecthFeedbacks()
     })
+
+    async function ChangeFeedbackType (type) {
+      try {
+        state.isLoadingFeedbacks = true
+        state.pagination.limit = 5
+        state.pagination.offset = 0
+        state.currentFeedbackType = type
+        const { data } = await services.users.getAll({
+          type, ...state.pagination
+        })
+        state.feedbacks = data.results
+        state.pagination = data.pagination
+        state.isLoadingFeedbacks = false
+      } catch (error) {
+        handleErrors(error)
+      }
+    }
     function handleErrors (error) {
+      state.isLoading = false
       state.hasError = !!error
     }
 
@@ -103,7 +123,8 @@ export default {
 
     return {
       state,
-      fecthFeedbacks
+      fecthFeedbacks,
+      ChangeFeedbackType
     }
   }
 }
