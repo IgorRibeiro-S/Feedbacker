@@ -48,6 +48,7 @@
           :feedback="feedback"
           class="mb-8"
           />
+          <LoadingFeedback v-if="state.isLoadingMoreFeedbacks"/>
       </div>
       </div>
     </div>
@@ -59,7 +60,7 @@ import FiltersView from './FiltersView.vue'
 import LoadingFeedback from './LoadingFeedback.vue'
 import FeedbackCard from './FeedbackCard'
 import services from '../../services'
-import { onMounted } from '@vue/runtime-core'
+import { onMounted, onUnmounted } from '@vue/runtime-core'
 
 export default {
   components: {
@@ -75,13 +76,20 @@ export default {
       currentFeedbackType: '',
       pagination: {
         limit: 5,
-        offset: 0
+        offset: 0,
+        total: 0
       },
       isLoading: false,
-      isLoadingFeedbacks: false
+      isLoadingFeedbacks: false,
+      isLoadingMoreFeedbacks: false
     })
     onMounted(() => {
       fecthFeedbacks()
+      window.addEventListener('scroll', handleScroll, false)
+    })
+
+    onUnmounted(() => {
+      window.removeEventListener('scroll', handleScroll, false)
     })
 
     async function ChangeFeedbackType (type) {
@@ -101,10 +109,40 @@ export default {
       }
     }
     function handleErrors (error) {
+      state.isLoadingFeedbacks = false
       state.isLoading = false
+      state.isLoadingMoreFeedbacks = false
       state.hasError = !!error
     }
 
+    async function handleScroll () {
+      const isBottomOfWindow = Math.ceil(
+        document.documentElement.scrollTop + window.innerHeight
+      ) >= document.documentElement.scrollHeight
+
+      // eslint-disable-next-line
+      if (state.isLoading || state.isLoadingMoreFeedbacks) return
+      if (isBottomOfWindow) return
+      // eslint-disable-next-line
+      if (state.feedbacks.length >= state.pagination.total) return
+      try {
+        state.isLoadingMoreFeedbacks = true
+        const { data } = await services.users.getAll({
+          ...state.pagination,
+          type: state.currentFeedbackType,
+          offset: (state.pagination.offset + 5)
+        })
+        if (data.results.length) {
+          state.feedbacks.push(...data.results)
+        }
+
+        state.isLoadingMoreFeedbacks = false
+        state.pagination = data.pagination
+      } catch (error) {
+        state.isLoadingMoreFeedbacks = false
+        handleErrors(error)
+      }
+    }
     async function fecthFeedbacks () {
       try {
         state.isLoading = true
