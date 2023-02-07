@@ -21,7 +21,9 @@
             simples widget na página.
           </p>
           <div>
-            <button class="mt-10 px-6 py-2 text-center text-brand-main font-bold bg-white rounded-full focus:outline-none">Crie uma conta grátis</button>
+            <button
+            @click= "() => emit('create-account')"
+            class="mt-10 px-6 py-2 text-center text-brand-main font-bold bg-white rounded-full focus:outline-none">Crie uma conta grátis</button>
           </div>
         </div>
     </div>
