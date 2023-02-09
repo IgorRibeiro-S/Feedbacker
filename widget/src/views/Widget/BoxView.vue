@@ -45,7 +45,7 @@
         </svg>
       </span>
       widget by
-      <span class="ml-1 font-bold">
+      <span class="ml-1 font-bold"  >
         feedbacker
       </span>
     </div>
