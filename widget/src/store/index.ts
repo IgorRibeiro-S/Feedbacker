@@ -19,7 +19,7 @@ const initialState: StoreState = {
 }
 
 const state = reactive<StoreState>({
-    ...initialState
+  ...initialState
 })
 
 export function setCurrentComponent (component: string): void {
