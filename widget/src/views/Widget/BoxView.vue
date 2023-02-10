@@ -1,5 +1,5 @@
 <template>
-  <div class="box animate__animated animate_fadeInUp animate__faster">
+  <div class="box animate__animated animate__fadeInUp animate__faster">
     <div
       class="relative w-full flex"
       :class="{
@@ -8,14 +8,14 @@
       }">
       <button
       v-if="canShowAdditionalControlAndInfo"
-      @click="() => ({})"
+      @click="back"
       :disabled="canGoBack"
       :class="{ invisible: canGoBack }"
       class="text-xl text-gray-800 focus:outline-none"
       >
       <svg
-      width="13"
-      height="5"
+      width="20"
+      height="10"
       viewBox="0 0 13 5"
       fill="none"
       xmlns="http://www.w3.org/2000/svg">
@@ -34,6 +34,7 @@
         &times;
       </button>
     </div>
+    <WizardView/>
     <div class="text-gray-800 text-sm flex" v-if="canShowAdditionalControlAndInfo">
       <span class="mr-3 mt-1">
         <svg width="15"
@@ -53,13 +54,16 @@
 </template>
 <script lang="ts">
 import { defineComponent, computed, ComputedRef, SetupContext } from 'vue'
+import WizardView from '../../components/wizard/WizardView.vue'
 // eslint-disable-next-line
 // @ts-ignore
 import { brand } from '@/../palette'
 import useStore from '../../hooks/store'
+import useNavigation from '../../hooks/navigation'
 
 interface SetupReturn {
   emit: SetupContext['emit'];
+  back(): void;
   canGoBack: ComputedRef<boolean>;
   label: ComputedRef<string>;
   canShowAdditionalControlAndInfo: ComputedRef<boolean>;
@@ -67,9 +71,13 @@ interface SetupReturn {
 }
 
 export default defineComponent({
+  components: {
+    WizardView
+  },
   emit: ['close-box'],
   setup (_, { emit }: SetupContext) : SetupReturn {
     const store = useStore()
+    const { back } = useNavigation()
 
     const label = computed<string>(() => {
       if (store.feedbackType === 'ISSUE') {
@@ -92,6 +100,7 @@ export default defineComponent({
     })
     return {
       emit,
+      back,
       canGoBack,
       brandColors: brand,
       canShowAdditionalControlAndInfo,
@@ -102,7 +111,7 @@ export default defineComponent({
 </script>
 <style lang="postcss" scoped>
 .box {
-  @apply fixed z-50 bottom-0 right-0 mb-5 mr-5 bg-white rounded-xl py-5 px-5 flex items-center shadow-xl select-none hover:bg-slateblue-100 flex-col;
+  @apply fixed z-50 bottom-0 right-0 mb-5 mr-5 bg-white rounded-xl py-3 px-5 flex items-center shadow-xl select-none flex-col;
   width: 400px;
 }
 </style>
