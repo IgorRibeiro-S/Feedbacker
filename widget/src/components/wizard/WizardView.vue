@@ -9,6 +9,8 @@
 <script lang="ts">
 import { setFeedbackType, StoreState } from '@/store'
 import SelectFeedbackType from './SelectFeedbackType.vue'
+import SuccessView from './SuccessView.vue'
+import ErrorView from './ErrorView.vue'
 import WriteAFeedback from './WriteAFeedback.vue'
 import { defineComponent } from '@vue/runtime-core'
 import useStore from '../../hooks/store'
@@ -23,7 +25,9 @@ interface SetupReturn {
 export default defineComponent({
   components: {
     SelectFeedbackType,
-    WriteAFeedback
+    WriteAFeedback,
+    SuccessView,
+    ErrorView
   },
   setup (): SetupReturn {
     const store = useStore()
