@@ -1,12 +1,16 @@
 import axios from 'axios'
+import FeedbacksService from './feedbacks'
 
-const API_ENV = {
+const API_ENVS = {
   production: '',
+  development: '',
   local: 'https://backend-treinamento.vercel.app'
 }
 
 const httpClient = axios.create({
-  baseURL: API_ENV.local
+  // eslint-disable-next-line
+  // @ts-ignore
+  baseURL: API_ENVS[process.env.NODE_ENV] || API_ENVS.local
 })
 
 httpClient.interceptors.response.use((response) => {
@@ -21,5 +25,5 @@ httpClient.interceptors.response.use((response) => {
   return error
 })
 export default {
-
+  feedbacks: FeedbacksService(httpClient)
 }

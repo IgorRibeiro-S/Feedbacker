@@ -55,9 +55,6 @@
 <script lang="ts">
 import { defineComponent, computed, ComputedRef, SetupContext } from 'vue'
 import WizardView from '../../components/wizard/WizardView.vue'
-// eslint-disable-next-line
-// @ts-ignore
-import { brand } from '@/../palette'
 import useStore from '../../hooks/store'
 import useNavigation from '../../hooks/navigation'
 
@@ -67,7 +64,6 @@ interface SetupReturn {
   canGoBack: ComputedRef<boolean>;
   label: ComputedRef<string>;
   canShowAdditionalControlAndInfo: ComputedRef<boolean>;
-  brandColors: Record<string, string>;
 }
 
 export default defineComponent({
@@ -102,7 +98,6 @@ export default defineComponent({
       emit,
       back,
       canGoBack,
-      brandColors: brand,
       canShowAdditionalControlAndInfo,
       label
     }
