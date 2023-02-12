@@ -77,7 +77,14 @@
               Erro ao carregar o Script!
             </span>
               <div v-else class="overflow-x-scroll">
-              <pre id="scriptCopy">&lt;script src="https://igorribeiro-s-feedbacker-widget.netlify.app?api_key={{ store.User.currentUser.apiKey }}"&gt;&lt;script&gt;</pre>
+              <pre id="scriptCopy">
+&lt;script
+defer
+async
+onload="init('{{store.User.currentUser.apiKey}}')"
+src="https://igorRibeiro-S-feedbacker-widget.netlify.app/init.js"
+&gt;&lt;/script&gt;
+                </pre>
             </div>
             <span>
               <svg
