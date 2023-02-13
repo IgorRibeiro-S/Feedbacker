@@ -5,7 +5,7 @@ function init (apiKey) {
         const fp = await window.FingerprintJS.load()
         const fingerprint = await fp.get()
 
-        const WIDGET_URL = `https://igorRibeiro-S-feedbacker-widget.nelify.app?api_key=${apikey}&page=${page}&fingerprint=${fingerprint.visitorId}`
+        const WIDGET_URL = `https://igorribeiro-s-feedbacker-widget.nelify.app?api_key=${apikey}&page=${page}&fingerprint=${fingerprint.visitorId}`
         const res = await fetch(`https://backend-treinamento.vercel.app/apikey/exists?apikey=${apiKey}`, config)
 
         if (res.status === 200) {
@@ -34,7 +34,7 @@ function init (apiKey) {
         console.log('* [Feedbacker] error in load ApiKey')
     }
     const script = document.createElement('script')
-    script.src = 'https://openfpcdn.io/fingerprintjs/v3/iife.min.js'
+    script.src = '//cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js'
     script.async = 'async'
     script.addEventListener('load', handleLoadWidget)
 
