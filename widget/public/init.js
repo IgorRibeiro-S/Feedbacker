@@ -21,6 +21,8 @@ function init (apiKey) {
             iframe.style.zIndex = '99999'
             document.body.appendChild(iframe)
             window.addEventListener('message', (event) => {
+                if (!event.data.isWidget) returnS
+
                 if (event.data.isOpen) {
                     iframe.width = '100%'
                     iframe.height = '100%'
@@ -32,7 +34,7 @@ function init (apiKey) {
 
             return
         }
-        console.log('* [Feedbacker] error in load ApiKey')
+        console.log('*  [feedbacker] was not loaded because apikey does not exists')
     }
     const script = document.createElement('script')
     script.src = '//cdn.jsdelivr.net/npm/@fingerprintjs/fingerprintjs@3/dist/fp.min.js'
