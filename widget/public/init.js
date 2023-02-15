@@ -4,7 +4,7 @@ function init (apiKey) {
       const fp = await window.FingerprintJS.load()
       const fingerprint = await fp.get()
   
-      const WIDGET_URL = `https://igorribeiro-s-feedbacker-widget.nelify.app?api_key=${apiKey}&page=${page}&fingerprint=${fingerprint.visitorId}`
+      const WIDGET_URL = `https://igorribeiro-s-feedbacker-widget.netlify.app?api_key=${apiKey}&page=${page}&fingerprint=${fingerprint.visitorId}`
       const config = { method: 'HEAD' }
       const res = await fetch(`https://backend-treinamento.vercel.app/apikey/exists?apikey=${apiKey}`, config)
   
