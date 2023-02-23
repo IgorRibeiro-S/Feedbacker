@@ -3,9 +3,9 @@ package com.igor.feedbacker.repositories;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.igor.feedbacker.entities.Users;
+import com.igor.feedbacker.entities.Feedbacks;
 
 @Repository
-public interface UsersRepository extends JpaRepository<Users, String> {
+public interface FeedbacksRepository extends JpaRepository<Feedbacks, String> {
 	
 }

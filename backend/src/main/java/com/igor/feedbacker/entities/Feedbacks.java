@@ -1,7 +1,6 @@
 package com.igor.feedbacker.entities;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +10,11 @@ import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import com.igor.feedbacker.utils.RandomString;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-
 
 @ToString
 @NoArgsConstructor
@@ -26,9 +22,9 @@ import lombok.ToString;
 @EqualsAndHashCode
 @Getter
 @Entity
-@Table(name="users")
-public class Users implements Serializable {
-	
+@Table(name = "feedbacks")
+public class Feedbacks implements Serializable {
+
 	private static final long serialVersionUID = 1L;
 	
 	@GeneratedValue(generator = "uuid")
@@ -36,24 +32,21 @@ public class Users implements Serializable {
 	@Column(columnDefinition = "CHAR(32)")
 	@Id
 	private String id;
-	
-	private String name;
-	private String email;
-	private String password;
-	
+	private String type;
+	private String text;
+	private String fingerprint;
 	private String apiKey;
+	private String device;
+	private String page;
 	
-	private LocalDateTime createdAt;
-
-	public Users(String name, String email, String password) {
-
-		this.name = name;
-		this.email = email;
-		this.password = password;
-		this.createdAt = LocalDateTime.now();
-		this.apiKey = RandomString.getAlphaNumericString(30);
+	public Feedbacks(String type, String text, String fingerprint, String apiKey, String device, String page) {
+		this.type = type;
+		this.text = text;
+		this.fingerprint = fingerprint;
+		this.apiKey = apiKey;
+		this.device = device;
+		this.page = page;
 	}
-	
-	
+
 	
 }

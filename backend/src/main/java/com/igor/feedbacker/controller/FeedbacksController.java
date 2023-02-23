@@ -16,39 +16,39 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.igor.feedbacker.entities.Users;
-import com.igor.feedbacker.services.UsersServiceImpl;
+import com.igor.feedbacker.entities.Feedbacks;
+import com.igor.feedbacker.services.FeedbacksServiceImpl;
 
 @RestController
 @CrossOrigin
-@RequestMapping(value = "/auth/register")
-public class UsersController {
+@RequestMapping(value = "/feedbacks")
+public class FeedbacksController {
 	
 	@Autowired
-	private UsersServiceImpl usersService;
+	private FeedbacksServiceImpl feedbackssService;
 	
 	@GetMapping
-	public ResponseEntity<List<Users>> allUsers(){
-		List<Users> list = usersService.buscarTodos();
+	public ResponseEntity<List<Feedbacks>> allFeedbacks(){
+		List<Feedbacks> list = feedbackssService.buscarTodos();
 		return ResponseEntity.ok().body(list);
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Users> findById(@PathVariable String id){
-		Optional<Users> user = usersService.buscaPorId(id);
-		return ResponseEntity.ok().body(user.get());
+	public ResponseEntity<Feedbacks> findById(@PathVariable String id){
+		Optional<Feedbacks> feedbacks = feedbackssService.buscaPorId(id);
+		return ResponseEntity.ok().body(feedbacks.get());
 	}
 	
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id){
-		usersService.deletarUsuario(id);
+		feedbackssService.deletarFeedback(id);
 		return ResponseEntity.noContent().build();
 	}
 	
 	@PostMapping
-	public ResponseEntity<Users> newUser(@RequestBody Users obj) {
-		Users user1 = usersService.novoUsuario(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user1.getId()).toUri();
+	public ResponseEntity<Feedbacks> newFeedback(@RequestBody Feedbacks obj) {
+		Feedbacks feedbacks1 = feedbackssService.novoFeedback(obj);
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(feedbacks1.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 }

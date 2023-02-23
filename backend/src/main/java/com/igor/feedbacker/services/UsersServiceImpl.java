@@ -2,7 +2,6 @@ package com.igor.feedbacker.services;
 
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,14 +28,14 @@ public class UsersServiceImpl implements UsersServicesInterface {
 	}
 
 	@Override
-	public void deletarUsuario(UUID id) {
+	public void deletarUsuario(String id) {
 		buscaPorId(id);
 		usersRepo.deleteById(id);
 		
 	}
 
 	@Override
-	public Optional<Users> buscaPorId(UUID id) {
+	public Optional<Users> buscaPorId(String id) {
 		Optional<Users> obj = usersRepo.findById(id);
 		return obj;
 	}
