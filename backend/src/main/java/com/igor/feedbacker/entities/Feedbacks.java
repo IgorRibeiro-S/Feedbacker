@@ -47,6 +47,4 @@ public class Feedbacks implements Serializable {
 		this.device = device;
 		this.page = page;
 	}
-
-	
 }

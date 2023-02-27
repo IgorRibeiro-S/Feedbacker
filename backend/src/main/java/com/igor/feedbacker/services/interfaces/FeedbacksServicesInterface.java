@@ -11,4 +11,5 @@ public interface FeedbacksServicesInterface {
 	public Feedbacks novoFeedback(Feedbacks obj);
 	public void deletarFeedback(String id);
 	public Optional<Feedbacks> buscaPorId(String id);
+	public List<Feedbacks> buscarPorTipo(String tipo);
 }

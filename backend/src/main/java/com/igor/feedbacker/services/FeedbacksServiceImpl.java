@@ -40,4 +40,9 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 		return obj;
 	}
 
+	@Override
+	public List<Feedbacks> buscarPorTipo(String tipo) {
+		return feedbacksRepo.findByTypeContains(tipo);
+	}
+
 }
