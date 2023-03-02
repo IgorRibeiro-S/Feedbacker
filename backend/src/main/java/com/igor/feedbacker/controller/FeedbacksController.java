@@ -22,6 +22,9 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.igor.feedbacker.entities.Feedbacks;
 import com.igor.feedbacker.services.FeedbacksServiceImpl;
 
+import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.Authorization;
+
 @RestController
 @CrossOrigin
 @RequestMapping(value = "/feedbacks")
@@ -30,24 +33,28 @@ public class FeedbacksController {
 	@Autowired
 	private FeedbacksServiceImpl feedbackssService;
 	
+	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
 	@GetMapping
 	public ResponseEntity<List<Feedbacks>> allFeedbacks(){
 		List<Feedbacks> list = feedbackssService.buscarTodos();
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
 	@GetMapping(value = "/{id}")
 	public ResponseEntity<Feedbacks> findById(@PathVariable String id){
 		Optional<Feedbacks> feedbacks = feedbackssService.buscaPorId(id);
 		return ResponseEntity.ok().body(feedbacks.get());
 	}
 	
+	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
 	@GetMapping(value = "/type")
 	public ResponseEntity<List<Feedbacks>> findByType(@RequestParam String type){
 		List<Feedbacks> list = feedbackssService.buscarPorTipo(type);
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
 	@GetMapping(value = "/summary")
 	public ResponseEntity<HashMap<String, Integer>> findFeedbacksSummary(){
 		HashMap<String, Integer> example = new HashMap<>();
@@ -69,7 +76,6 @@ public class FeedbacksController {
 			if(c.getType().equals("idea") || c.getType().equals("IDEA")) {
 				idea++;
 			}
-			System.out.println(c.getType());
 		}
 		example.put("all", types.size());
 		example.put("issue", issue);
@@ -79,12 +85,14 @@ public class FeedbacksController {
 		return ResponseEntity.ok().body(example);
 	}
 	
+	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id){
 		feedbackssService.deletarFeedback(id);
 		return ResponseEntity.noContent().build();
 	}
 	
+	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
 	@PostMapping
 	public ResponseEntity<Feedbacks> newFeedback(@RequestBody Feedbacks obj) {
 		Feedbacks feedbacks1 = feedbackssService.novoFeedback(obj);

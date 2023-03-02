@@ -8,4 +8,7 @@ import com.igor.feedbacker.entities.Users;
 @Repository
 public interface UsersRepository extends JpaRepository<Users, String> {
 	
+	public Users findByEmail(String email);
+
+	public Users findByNameAndPassword(String name, String password);
 }

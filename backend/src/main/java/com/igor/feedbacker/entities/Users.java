@@ -41,17 +41,20 @@ public class Users implements Serializable {
 	private String email;
 	private String password;
 	
+	@Column(name = "u_roles")
+	private String roles;
 	private String apiKey;
 	
 	private LocalDateTime createdAt;
 
-	public Users(String name, String email, String password) {
+	public Users(String name, String email, String password, String roles) {
 
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.createdAt = LocalDateTime.now();
 		this.apiKey = RandomString.getAlphaNumericString(30);
+		this.roles = roles; 
 	}
 	
 	

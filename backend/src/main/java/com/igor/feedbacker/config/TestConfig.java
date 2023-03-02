@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.igor.feedbacker.entities.Feedbacks;
 import com.igor.feedbacker.entities.Users;
@@ -19,10 +21,12 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private FeedbacksRepository feedbacksRepository;
+	
+	PasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	@Override
 	public void run(String... args) throws Exception {
-		Users u1 = new Users("Doublas", "Doug@gmail.com", "456789");
+		Users u1 = new Users("Doublas", "Doug@gmail.com", encoder.encode("456789"), "ROLE_ADMIN");
 		Feedbacks f1 = new Feedbacks("idea", "texto","teste", "1212121", "chrome", "pg1" );
 		Feedbacks f2 = new Feedbacks("other", "texto","teste", "1212121", "chrome", "pg1" );
 		Feedbacks f3 = new Feedbacks("issue", "texto","teste", "1212121", "chrome", "pg1" );
