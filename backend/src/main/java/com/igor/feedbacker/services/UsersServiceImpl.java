@@ -30,14 +30,13 @@ public class UsersServiceImpl implements SegurancaService {
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("isAuthenticated()")
 	public Users findById(String id) {
 		Optional<Users> obj = repository.findById(id);
 		return obj.get();
 	}
 
 	@Override
-	@PreAuthorize("hasRole('ADMIN')")
 	public Users insert(Users obj) {
 		if (obj.getName() == null || obj.getName().trim().isEmpty() ||
 

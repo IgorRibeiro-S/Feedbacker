@@ -32,7 +32,7 @@ public class SwaggerConfig {
 	private ApiInfo apiInfo() {
 	    return new ApiInfoBuilder()
 	            .title("REST API Document - Feedbacker")
-	            .description("Se autentique em login-resource, altere 'string' "
+	            .description(""
 	            		+ "de name para o email cadastrado e 'string' de senha para a senha cadastrada."
 	            		+ "Será gerado um token, basta adicioná-lo em 'Authorize' seguido da nomeclatura Bearer. ")
 	            
