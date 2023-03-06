@@ -2,15 +2,19 @@ package com.igor.feedbacker.entities;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.igor.feedbacker.utils.RandomString;
 
 import lombok.EqualsAndHashCode;
@@ -38,14 +42,20 @@ public class Users implements Serializable {
 	private String id;
 	
 	private String name;
+	@Column(unique = true)
 	private String email;
 	private String password;
 	
 	@Column(name = "u_roles")
 	private String roles;
+	@Column(unique = true)
 	private String apiKey;
 	
 	private LocalDateTime createdAt;
+	
+	@JsonIgnore
+	@OneToMany(mappedBy = "user")
+	private Set<Feedbacks> feedbacks = new HashSet<>();
 
 	public Users(String name, String email, String password, String roles) {
 

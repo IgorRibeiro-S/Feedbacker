@@ -27,11 +27,11 @@ public class TestConfig implements CommandLineRunner {
 	@Override
 	public void run(String... args) throws Exception {
 		Users u1 = new Users("Doublas", "Doug@gmail.com", encoder.encode("456789"), "ROLE_ADMIN");
-		Feedbacks f1 = new Feedbacks("idea", "texto","teste", "1212121", "chrome", "pg1" );
-		Feedbacks f2 = new Feedbacks("other", "texto","teste", "1212121", "chrome", "pg1" );
-		Feedbacks f3 = new Feedbacks("issue", "texto","teste", "1212121", "chrome", "pg1" );
-		Feedbacks f4 = new Feedbacks("issue", "texto","teste", "1212121", "chrome", "pg1" );
-		Feedbacks f5 = new Feedbacks("issue", "texto","teste", "1212121", "chrome", "pg1" );
+		Feedbacks f1 = new Feedbacks("idea", "texto","teste", "1212121", "chrome", "pg1", u1 );
+		Feedbacks f2 = new Feedbacks("other", "texto","teste", "4444", "chrome", "pg1", u1 );
+		Feedbacks f3 = new Feedbacks("issue", "texto","teste", "555666", "chrome", "pg1", u1 );
+		Feedbacks f4 = new Feedbacks("issue", "texto","teste", "435345", "chrome", "pg1", u1 );
+		Feedbacks f5 = new Feedbacks("issue", "texto","teste", "90959585", "chrome", "pg1", u1 );
 		
 		userRepository.save(u1);
 		feedbacksRepository.save(f1);

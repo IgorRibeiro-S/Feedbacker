@@ -6,6 +6,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -35,16 +37,22 @@ public class Feedbacks implements Serializable {
 	private String type;
 	private String text;
 	private String fingerprint;
+	@Column(unique = true)
 	private String apiKey;
 	private String device;
 	private String page;
 	
-	public Feedbacks(String type, String text, String fingerprint, String apiKey, String device, String page) {
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private Users user;
+	
+	public Feedbacks(String type, String text, String fingerprint, String apiKey, String device, String page, Users user) {
 		this.type = type;
 		this.text = text;
 		this.fingerprint = fingerprint;
 		this.apiKey = apiKey;
 		this.device = device;
 		this.page = page;
+		this.user = user;
 	}
 }
