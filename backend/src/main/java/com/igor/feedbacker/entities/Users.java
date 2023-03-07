@@ -66,7 +66,4 @@ public class Users implements Serializable {
 		this.apiKey = RandomString.getAlphaNumericString(30);
 		this.roles = roles; 
 	}
-	
-	
-	
 }

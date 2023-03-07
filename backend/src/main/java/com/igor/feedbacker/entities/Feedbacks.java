@@ -34,10 +34,10 @@ public class Feedbacks implements Serializable {
 	@Column(columnDefinition = "CHAR(32)")
 	@Id
 	private String id;
+	private String idUser;
 	private String type;
 	private String text;
 	private String fingerprint;
-	@Column(unique = true)
 	private String apiKey;
 	private String device;
 	private String page;
@@ -46,7 +46,8 @@ public class Feedbacks implements Serializable {
 	@JoinColumn(name = "user_id")
 	private Users user;
 	
-	public Feedbacks(String type, String text, String fingerprint, String apiKey, String device, String page, Users user) {
+	public Feedbacks(String idUser, String type, String text, String fingerprint, String apiKey, String device, String page, Users user) {
+		this.idUser = idUser;
 		this.type = type;
 		this.text = text;
 		this.fingerprint = fingerprint;

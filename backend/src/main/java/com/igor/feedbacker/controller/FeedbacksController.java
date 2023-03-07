@@ -20,7 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.igor.feedbacker.entities.Feedbacks;
+import com.igor.feedbacker.entities.Users;
 import com.igor.feedbacker.services.FeedbacksServiceImpl;
+import com.igor.feedbacker.services.UsersServiceImpl;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
@@ -32,6 +34,9 @@ public class FeedbacksController {
 	
 	@Autowired
 	private FeedbacksServiceImpl feedbackssService;
+	
+	@Autowired
+	private UsersServiceImpl service;
 	
 	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
 	@GetMapping
@@ -95,6 +100,9 @@ public class FeedbacksController {
 	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
 	@PostMapping
 	public ResponseEntity<Feedbacks> newFeedback(@RequestBody Feedbacks obj) {
+		obj.setIdUser(obj.getUser().getId());
+		Users us1 = service.findById(obj.getUser().getId());
+		obj.setApiKey(us1.getApiKey());
 		Feedbacks feedbacks1 = feedbackssService.novoFeedback(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(feedbacks1.getId()).toUri();
 		return ResponseEntity.created(uri).build();

@@ -17,6 +17,7 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 	@Autowired
 	private FeedbacksRepository feedbacksRepo;
 	
+	
 	@Override
 	@PreAuthorize("hasRole('ADMIN')")
 	public List<Feedbacks> buscarTodos() {
@@ -25,7 +26,7 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 
 	@Override
 	@PreAuthorize("isAuthenticated()")
-	public Feedbacks novoFeedback(Feedbacks obj) {
+	public Feedbacks novoFeedback(Feedbacks obj) {;
 		Feedbacks usr = feedbacksRepo.save(obj);
 		return feedbacksRepo.save(usr);
 	}
