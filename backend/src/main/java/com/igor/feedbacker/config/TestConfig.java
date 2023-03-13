@@ -13,7 +13,7 @@ import com.igor.feedbacker.repositories.FeedbacksRepository;
 import com.igor.feedbacker.repositories.UsersRepository;
 
 @Configuration
-@Profile("prod")
+@Profile("test")
 public class TestConfig implements CommandLineRunner {
 
 	@Autowired
