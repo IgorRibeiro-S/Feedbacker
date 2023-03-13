@@ -57,8 +57,7 @@ public class AuthController {
 		usersService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-
-	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
+	@ApiOperation(value = "Novo Usuário")
 	@PostMapping(value = "/register")
 	public ResponseEntity<Users> newUser(@RequestBody Users obj) {
 		Users user1 = usersService.insert(obj);
