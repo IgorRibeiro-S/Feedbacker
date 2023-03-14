@@ -58,12 +58,11 @@ public class Users implements Serializable {
 	private Set<Feedbacks> feedbacks = new HashSet<>();
 
 	public Users(String name, String email, String password, String roles) {
-
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.createdAt = LocalDateTime.now();
-		this.apiKey = RandomString.getAlphaNumericString(30);
+		this.apiKey = RandomString.getAlphaNumericString(32);
 		this.roles = roles; 
 	}
 }
