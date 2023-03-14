@@ -1,6 +1,7 @@
 package com.igor.feedbacker.controller;
 
 import java.net.URI;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,7 @@ import com.igor.feedbacker.entities.Users;
 import com.igor.feedbacker.security.JwtUtils;
 import com.igor.feedbacker.security.Login;
 import com.igor.feedbacker.services.UsersServiceImpl;
+import com.igor.feedbacker.utils.RandomString;
 
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
@@ -60,6 +62,8 @@ public class AuthController {
 	@ApiOperation(value = "Novo Usuário")
 	@PostMapping(value = "/register")
 	public ResponseEntity<Users> newUser(@RequestBody Users obj) {
+		obj.setApiKey(RandomString.getAlphaNumericString(32));
+		obj.setCreatedAt(LocalDateTime.now());
 		Users user1 = usersService.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user1.getId()).toUri();
 		return ResponseEntity.created(uri).build();

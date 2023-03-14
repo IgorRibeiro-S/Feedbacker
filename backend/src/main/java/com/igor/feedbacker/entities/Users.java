@@ -15,7 +15,6 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.igor.feedbacker.utils.RandomString;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -61,8 +60,6 @@ public class Users implements Serializable {
 		this.name = name;
 		this.email = email;
 		this.password = password;
-		this.createdAt = LocalDateTime.now();
-		this.apiKey = RandomString.getAlphaNumericString(32);
 		this.roles = roles; 
 	}
 }
