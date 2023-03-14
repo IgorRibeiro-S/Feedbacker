@@ -121,10 +121,11 @@ export default {
         const { data, errors } = await services.auth.register({
           name: state.name.value,
           email: state.email.value,
-          password: state.password.value
+          password: state.password.value,
+          roles: 'ROLE_USER'
         })
 
-        if (!errors) {
+        if (!errors || errors.status === 201) {
           window.localStorage.setItem('token', data.token)
           state.isLoading = false
           toast.success('Cadastro realizado com sucesso')

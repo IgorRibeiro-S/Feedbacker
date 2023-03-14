@@ -7,7 +7,7 @@ import { setGlobalLoading } from '../store/global'
 
 const API_ENV = {
   production: '',
-  local: 'https://backend-treinamento.vercel.app'
+  local: 'https://feedbacker.herokuapp.com'
 }
 
 const httpClient = axios.create({

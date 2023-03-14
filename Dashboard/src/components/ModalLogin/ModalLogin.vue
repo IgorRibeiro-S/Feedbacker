@@ -95,8 +95,8 @@ export default {
         toast.clear()
         state.isLoading = true
         const { data, errors } = await services.auth.login({
-          email: state.email.value,
-          password: state.password.value
+          name: state.email.value,
+          senha: state.password.value
         })
 
         if (!errors) {
