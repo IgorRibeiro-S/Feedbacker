@@ -19,7 +19,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RequestMapping(value = "/user/me")
 public class UsersController {
 

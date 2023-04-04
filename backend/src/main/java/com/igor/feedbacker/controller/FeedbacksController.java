@@ -8,6 +8,7 @@ import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -28,7 +29,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.Authorization;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin
 @RequestMapping(value = "/feedbacks")
 public class FeedbacksController {
 	
@@ -59,6 +60,7 @@ public class FeedbacksController {
 		return ResponseEntity.ok().body(list);
 	}
 	
+	@PreAuthorize("isAuthenticated()")
 	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
 	@GetMapping(value = "/summary")
 	public ResponseEntity<HashMap<String, Integer>> findFeedbacksSummary(){
