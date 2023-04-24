@@ -1,6 +1,7 @@
 package com.igor.feedbacker.controller;
 
 import java.net.URI;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,6 +11,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -23,6 +25,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import com.igor.feedbacker.entities.Feedbacks;
 import com.igor.feedbacker.entities.Users;
+import com.igor.feedbacker.repositories.FeedbacksRepository;
+import com.igor.feedbacker.repositories.UsersRepository;
 import com.igor.feedbacker.services.FeedbacksServiceImpl;
 import com.igor.feedbacker.services.UsersServiceImpl;
 
@@ -39,6 +43,12 @@ public class FeedbacksController {
 
 	@Autowired
 	private UsersServiceImpl service;
+	
+	@Autowired
+	private UsersRepository repo;
+	
+	@Autowired
+	private FeedbacksRepository feedbackRepo;
 
 	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@GetMapping(value = "/user/{id}")
@@ -47,13 +57,6 @@ public class FeedbacksController {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
-	@GetMapping
-	public ResponseEntity<?> allFeedbacksById() {
-		//Map<String, Object> list = feedbackssService.buscarTodos();
-		List<Feedbacks> list = feedbackssService.getAll();
-		return ResponseEntity.ok().body(list);
-	}
 
 	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@GetMapping(value = "/{id}")
@@ -72,10 +75,11 @@ public class FeedbacksController {
 	@PreAuthorize("isAuthenticated()")
 	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@GetMapping(value = "/summary")
-	public ResponseEntity<HashMap<String, Integer>> findFeedbacksSummary() {
+	public ResponseEntity<HashMap<String, Integer>> findFeedbacksSummary(Authentication auth, Principal principal) {
 		HashMap<String, Integer> example = new HashMap<>();
+		Users usr = repo.findByEmail(auth.getName());
 		List<String> types = new ArrayList<>();
-		List<Feedbacks> list = feedbackssService.getAll();
+		List<Feedbacks> list = feedbackRepo.findByUserId(usr.getId());
 
 		int issue = 0;
 		int idea = 0;

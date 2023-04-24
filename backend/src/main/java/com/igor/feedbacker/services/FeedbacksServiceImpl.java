@@ -47,15 +47,9 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 
 	}
 
-	@PreAuthorize("hasRole('ADMIN')")
-	public List<Feedbacks> getAll() {
-		return feedbacksRepo.findAll();
-	}
-
 	@Override
 	@PreAuthorize("isAuthenticated()")
 	public Feedbacks novoFeedback(Feedbacks obj) {
-		;
 		Feedbacks usr = feedbacksRepo.save(obj);
 		return feedbacksRepo.save(usr);
 	}
