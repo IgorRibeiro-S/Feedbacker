@@ -42,15 +42,16 @@ public class TestConfig implements CommandLineRunner {
 		Feedbacks f3 = new Feedbacks(null, "issue", "texto","teste", null, "chrome", "pg1", u1 );
 		Feedbacks f4 = new Feedbacks(null, "issue", "texto","teste",null, "chrome", "pg1", u1 );
 		Feedbacks f5 = new Feedbacks(null, "issue", "texto","teste", null, "chrome", "pg1", u1 );
-		Pagination p1 = new Pagination(null, 0, 0, 5);
-		// Results r1 = new Results(null, p1);
-		
+		Users u2 = new Users("teste", "test", encoder.encode("123"), "ROLE_ADMIN");
+		Feedbacks f6 = new Feedbacks(null, "idea", "texto","teste", null, "chrome", "pg1", u2 );
 		userRepository.save(u1);
 		feedbacksRepository.save(f1);
 		feedbacksRepository.save(f2);
 		feedbacksRepository.save(f3);
 		feedbacksRepository.save(f4);
 		feedbacksRepository.save(f5);
+		userRepository.save(u2);
+		feedbacksRepository.save(f6);
 		//paginationRepo.save(p1);
 		//resultsRepo.save(r1);
 		

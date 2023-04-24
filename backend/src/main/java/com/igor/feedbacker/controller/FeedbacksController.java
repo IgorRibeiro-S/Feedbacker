@@ -51,9 +51,11 @@ public class FeedbacksController {
 	private FeedbacksRepository feedbackRepo;
 
 	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
-	@GetMapping(value = "/user/{id}")
-	public ResponseEntity<?> allFeedbacksById(@PathVariable String id) {
-		Map<String, Object> list = feedbackssService.buscarTodosPorId(id);
+	@GetMapping
+	public ResponseEntity<?> allFeedbacksById(Authentication auth, Principal principal) {
+		Users usr = repo.findByEmail(auth.getName());
+		
+		Map<String, Object> list = feedbackssService.buscarTodosPorId(usr.getId());
 		return ResponseEntity.ok().body(list);
 	}
 	
