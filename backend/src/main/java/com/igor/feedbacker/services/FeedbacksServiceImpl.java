@@ -1,6 +1,9 @@
 package com.igor.feedbacker.services;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,17 +19,43 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 
 	@Autowired
 	private FeedbacksRepository feedbacksRepo;
-	
-	
+
 	@Override
 	@PreAuthorize("hasRole('ADMIN')")
-	public List<Feedbacks> buscarTodos() {
+	public Map<String, Object> buscarTodosPorId(String id) {
+		List<Feedbacks> feedbackList = feedbacksRepo.findByUserId(id);
+		List<Map<String, Object>> resultList = new ArrayList<>();
+		for (Feedbacks feedback : feedbackList) {
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("text", feedback.getText());
+			resultMap.put("fingerprint", feedback.getFingerprint());
+			resultMap.put("id", feedback.getId());
+			resultMap.put("apiKey", feedback.getApiKey());
+			resultMap.put("type", feedback.getType());
+			resultMap.put("device", feedback.getDevice());
+			resultMap.put("page", feedback.getPage());
+			resultList.add(resultMap);
+		}
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("results", resultList);
+		Map<String, Integer> paginationMap = new HashMap<>();
+		paginationMap.put("offset", 0);
+		paginationMap.put("limit", resultList.size());
+		paginationMap.put("total", feedbackList.size());
+		resultMap.put("pagination", paginationMap);
+		return resultMap;
+
+	}
+
+	@PreAuthorize("hasRole('ADMIN')")
+	public List<Feedbacks> getAll() {
 		return feedbacksRepo.findAll();
 	}
 
 	@Override
 	@PreAuthorize("isAuthenticated()")
-	public Feedbacks novoFeedback(Feedbacks obj) {;
+	public Feedbacks novoFeedback(Feedbacks obj) {
+		;
 		Feedbacks usr = feedbacksRepo.save(obj);
 		return feedbacksRepo.save(usr);
 	}
@@ -36,7 +65,7 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 	public void deletarFeedback(String id) {
 		buscaPorId(id);
 		feedbacksRepo.deleteById(id);
-		
+
 	}
 
 	@Override
@@ -50,6 +79,32 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 	@PreAuthorize("isAuthenticated()")
 	public List<Feedbacks> buscarPorTipo(String tipo) {
 		return feedbacksRepo.findByTypeContains(tipo);
+	}
+
+	@Override
+	public Map<String, Object> buscarTodos() {
+		List<Feedbacks> feedbackList = feedbacksRepo.findAll();
+		List<Map<String, Object>> resultList = new ArrayList<>();
+		for (Feedbacks feedback : feedbackList) {
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("text", feedback.getText());
+			resultMap.put("fingerprint", feedback.getFingerprint());
+			resultMap.put("id", feedback.getId());
+			resultMap.put("apiKey", feedback.getApiKey());
+			resultMap.put("type", feedback.getType());
+			resultMap.put("device", feedback.getDevice());
+			resultMap.put("page", feedback.getPage());
+			resultList.add(resultMap);
+		}
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("results", resultList);
+		Map<String, Integer> paginationMap = new HashMap<>();
+		paginationMap.put("offset", 0);
+		paginationMap.put("limit", resultList.size());
+		paginationMap.put("total", feedbackList.size());
+		resultMap.put("pagination", paginationMap);
+		return resultMap;
+
 	}
 
 }

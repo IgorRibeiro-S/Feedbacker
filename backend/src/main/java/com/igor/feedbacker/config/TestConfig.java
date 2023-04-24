@@ -8,8 +8,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import com.igor.feedbacker.entities.Feedbacks;
+import com.igor.feedbacker.entities.Pagination;
+import com.igor.feedbacker.entities.Results;
 import com.igor.feedbacker.entities.Users;
 import com.igor.feedbacker.repositories.FeedbacksRepository;
+import com.igor.feedbacker.repositories.PaginationRepository;
+import com.igor.feedbacker.repositories.ResultsRepository;
 import com.igor.feedbacker.repositories.UsersRepository;
 
 @Configuration
@@ -22,16 +26,24 @@ public class TestConfig implements CommandLineRunner {
 	@Autowired
 	private FeedbacksRepository feedbacksRepository;
 	
+	@Autowired
+	private PaginationRepository paginationRepo;
+	
+	@Autowired
+	private ResultsRepository resultsRepo;
+	
 	PasswordEncoder encoder = new BCryptPasswordEncoder();
 
 	@Override
 	public void run(String... args) throws Exception {
-		Users u1 = new Users("Doublas", "Doug@gmail.com", encoder.encode("456789"), "ROLE_ADMIN");
+		Users u1 = new Users("Doublas", "tesst@gmail.com", encoder.encode("123"), "ROLE_ADMIN");
 		Feedbacks f1 = new Feedbacks(null, "idea", "texto","teste", null, "chrome", "pg1", u1 );
 		Feedbacks f2 = new Feedbacks(null, "other", "texto","teste", null, "chrome", "pg1", u1 );
 		Feedbacks f3 = new Feedbacks(null, "issue", "texto","teste", null, "chrome", "pg1", u1 );
 		Feedbacks f4 = new Feedbacks(null, "issue", "texto","teste",null, "chrome", "pg1", u1 );
 		Feedbacks f5 = new Feedbacks(null, "issue", "texto","teste", null, "chrome", "pg1", u1 );
+		Pagination p1 = new Pagination(null, 0, 0, 5);
+		// Results r1 = new Results(null, p1);
 		
 		userRepository.save(u1);
 		feedbacksRepository.save(f1);
@@ -39,6 +51,9 @@ public class TestConfig implements CommandLineRunner {
 		feedbacksRepository.save(f3);
 		feedbacksRepository.save(f4);
 		feedbacksRepository.save(f5);
+		//paginationRepo.save(p1);
+		//resultsRepo.save(r1);
+		
 	}
 
 }

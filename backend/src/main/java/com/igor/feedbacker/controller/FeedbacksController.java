@@ -4,6 +4,7 @@ import java.net.URI;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,55 +33,63 @@ import io.swagger.annotations.Authorization;
 @CrossOrigin
 @RequestMapping(value = "/feedbacks")
 public class FeedbacksController {
-	
+
 	@Autowired
 	private FeedbacksServiceImpl feedbackssService;
-	
+
 	@Autowired
 	private UsersServiceImpl service;
-	
-	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
-	@GetMapping
-	public ResponseEntity<List<Feedbacks>> allFeedbacks(){
-		List<Feedbacks> list = feedbackssService.buscarTodos();
+
+	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
+	@GetMapping(value = "/user/{id}")
+	public ResponseEntity<?> allFeedbacksById(@PathVariable String id) {
+		Map<String, Object> list = feedbackssService.buscarTodosPorId(id);
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
+	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
+	@GetMapping
+	public ResponseEntity<?> allFeedbacksById() {
+		//Map<String, Object> list = feedbackssService.buscarTodos();
+		List<Feedbacks> list = feedbackssService.getAll();
+		return ResponseEntity.ok().body(list);
+	}
+
+	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Feedbacks> findById(@PathVariable String id){
+	public ResponseEntity<Feedbacks> findById(@PathVariable String id) {
 		Optional<Feedbacks> feedbacks = feedbackssService.buscaPorId(id);
 		return ResponseEntity.ok().body(feedbacks.get());
 	}
-	
-	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
+
+	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@GetMapping(value = "/type")
-	public ResponseEntity<List<Feedbacks>> findByType(@RequestParam String type){
+	public ResponseEntity<List<Feedbacks>> findByType(@RequestParam String type) {
 		List<Feedbacks> list = feedbackssService.buscarPorTipo(type);
 		return ResponseEntity.ok().body(list);
 	}
-	
+
 	@PreAuthorize("isAuthenticated()")
-	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
+	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@GetMapping(value = "/summary")
-	public ResponseEntity<HashMap<String, Integer>> findFeedbacksSummary(){
+	public ResponseEntity<HashMap<String, Integer>> findFeedbacksSummary() {
 		HashMap<String, Integer> example = new HashMap<>();
 		List<String> types = new ArrayList<>();
-		List<Feedbacks> list = feedbackssService.buscarTodos();
-		
+		List<Feedbacks> list = feedbackssService.getAll();
+
 		int issue = 0;
 		int idea = 0;
 		int other = 0;
-		
-		for(Feedbacks c : list) {
+
+		for (Feedbacks c : list) {
 			types.add(c.getType());
-			if(c.getType().equals("other") || c.getType().equals("OTHER")){
+			if (c.getType().equals("other") || c.getType().equals("OTHER")) {
 				other++;
 			}
-			if(c.getType().equals("issue") || c.getType().equals("ISSUE")) {
+			if (c.getType().equals("issue") || c.getType().equals("ISSUE")) {
 				issue++;
 			}
-			if(c.getType().equals("idea") || c.getType().equals("IDEA")) {
+			if (c.getType().equals("idea") || c.getType().equals("IDEA")) {
 				idea++;
 			}
 		}
@@ -88,25 +97,27 @@ public class FeedbacksController {
 		example.put("issue", issue);
 		example.put("idea", idea);
 		example.put("other", other);
-		
+
 		return ResponseEntity.ok().body(example);
 	}
-	
-	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
+
+	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@DeleteMapping(value = "/{id}")
-	public ResponseEntity<Void> delete(@PathVariable String id){
+	public ResponseEntity<Void> delete(@PathVariable String id) {
 		feedbackssService.deletarFeedback(id);
 		return ResponseEntity.noContent().build();
 	}
-	
-	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
+
+	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@PostMapping
 	public ResponseEntity<Feedbacks> newFeedback(@RequestBody Feedbacks obj) {
 		obj.setIdUser(obj.getUser().getId());
 		Users us1 = service.findById(obj.getUser().getId());
 		obj.setApiKey(us1.getApiKey());
 		Feedbacks feedbacks1 = feedbackssService.novoFeedback(obj);
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(feedbacks1.getId()).toUri();
+		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(feedbacks1.getId())
+				.toUri();
 		return ResponseEntity.created(uri).build();
 	}
+
 }

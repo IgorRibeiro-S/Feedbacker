@@ -46,6 +46,10 @@ public class Feedbacks implements Serializable {
 	@JoinColumn(name = "user_id")
 	private Users user;
 	
+	@ManyToOne
+	@JoinColumn(name = "result_id")
+	private Results result;
+	
 	public Feedbacks(String idUser, String type, String text, String fingerprint, String apiKey, String device, String page, Users user) {
 		this.idUser = idUser;
 		this.type = type;
