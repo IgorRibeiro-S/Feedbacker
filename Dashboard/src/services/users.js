@@ -5,13 +5,13 @@ const defaultPagination = {
 
 export default httpClient => ({
   getMe: async () => {
-    const response = await httpClient.get('/users/me')
+    const response = await httpClient.get('/user/me')
     return {
       data: response.data
     }
   },
   generateApiKey: async () => {
-    const response = await httpClient.post('/users/me/apikey')
+    const response = await httpClient.post('/user/me/apikey')
     return {
       data: response.data
     }
