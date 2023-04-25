@@ -21,7 +21,7 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 	private FeedbacksRepository feedbacksRepo;
 
 	@Override
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("isAuthenticated()")
 	public Map<String, Object> buscarTodosPorId(String id) {
 		List<Feedbacks> feedbackList = feedbacksRepo.findByUserId(id);
 		List<Map<String, Object>> resultList = new ArrayList<>();

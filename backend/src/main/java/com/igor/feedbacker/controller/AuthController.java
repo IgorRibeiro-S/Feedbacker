@@ -53,13 +53,13 @@ public class AuthController {
 		return ResponseEntity.ok().body(user);
 	}
 
-	@ApiOperation(value = "", authorizations = { @Authorization(value="Bearer") })
+
 	@DeleteMapping(value = "/{id}")
 	public ResponseEntity<Void> delete(@PathVariable String id) {
 		usersService.delete(id);
 		return ResponseEntity.noContent().build();
 	}
-	@ApiOperation(value = "Novo Usuário")
+	
 	@PostMapping(value = "/register")
 	public ResponseEntity<Users> newUser(@RequestBody Users obj) {
 		obj.setApiKey(RandomString.getAlphaNumericString(32));
