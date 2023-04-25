@@ -21,6 +21,9 @@ export default httpClient => ({
     if (type) {
       query.type = type
       const response = await httpClient.get('/feedbacks/type', { params: query })
+      return {
+        data: response.data
+      }
     }
     const response = await httpClient.get('/feedbacks')
     return {
