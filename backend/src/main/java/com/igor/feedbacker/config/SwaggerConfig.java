@@ -37,7 +37,7 @@ public class SwaggerConfig {
 	            		+ "de name para o email cadastrado e 'string' de senha para a senha cadastrada."
 	            		+ "Será gerado um token, basta adicioná-lo em 'Authorize' seguido da nomeclatura Bearer. ")
 	            
-	            .termsOfServiceUrl("localhost (por enquanto)")
+	            .termsOfServiceUrl("")
 	            .version("1.0")
 	            .build();
 	}
