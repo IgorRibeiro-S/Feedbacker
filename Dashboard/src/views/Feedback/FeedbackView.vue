@@ -72,7 +72,7 @@ export default {
   setup () {
     const state = reactive({
       hasError: false,
-      feedbacks: ['text'],
+      feedbacks: [],
       currentFeedbackType: '',
       pagination: {
         limit: 5,
@@ -99,7 +99,7 @@ export default {
         state.pagination.offset = 0
         state.currentFeedbackType = type
         const { data } = await services.users.getAll({
-          type, ...state.pagination
+          type: state.currentFeedbackType, ...state.pagination
         })
         state.feedbacks = data.results
         state.pagination = data.pagination
