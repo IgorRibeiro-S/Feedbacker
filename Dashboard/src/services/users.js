@@ -20,7 +20,7 @@ export default httpClient => ({
     const query = { limit, offset }
     if (type) {
       query.type = type
-      const response = await httpClient.get('/feedbacks/type', { params: type })
+      const response = await httpClient.get('/feedbacks', { params: query } + '/type', type)
       return {
         data: response.data
       }
