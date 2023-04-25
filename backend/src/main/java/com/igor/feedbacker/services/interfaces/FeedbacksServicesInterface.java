@@ -1,6 +1,5 @@
 package com.igor.feedbacker.services.interfaces;
 
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
@@ -12,6 +11,6 @@ public interface FeedbacksServicesInterface {
 	public Feedbacks novoFeedback(Feedbacks obj);
 	public void deletarFeedback(String id);
 	public Optional<Feedbacks> buscaPorId(String id);
-	public List<Feedbacks> buscarPorTipo(String tipo);
+	public Map<String, Object> buscarPorTipo(String tipo);
 	public Map<String, Object> buscarTodosPorId(String id);
 }

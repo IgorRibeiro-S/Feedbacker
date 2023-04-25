@@ -71,8 +71,28 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 
 	@Override
 	@PreAuthorize("isAuthenticated()")
-	public List<Feedbacks> buscarPorTipo(String tipo) {
-		return feedbacksRepo.findByTypeContains(tipo);
+	public Map<String, Object> buscarPorTipo(String tipo) {
+		List<Feedbacks> feedbackList = feedbacksRepo.findByTypeContains(tipo);
+		List<Map<String, Object>> resultList = new ArrayList<>();
+		for (Feedbacks feedback : feedbackList) {
+			Map<String, Object> resultMap = new HashMap<>();
+			resultMap.put("text", feedback.getText());
+			resultMap.put("fingerprint", feedback.getFingerprint());
+			resultMap.put("id", feedback.getId());
+			resultMap.put("apiKey", feedback.getApiKey());
+			resultMap.put("type", feedback.getType());
+			resultMap.put("device", feedback.getDevice());
+			resultMap.put("page", feedback.getPage());
+			resultList.add(resultMap);
+		}
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("results", resultList);
+		Map<String, Integer> paginationMap = new HashMap<>();
+		paginationMap.put("offset", 0);
+		paginationMap.put("limit", resultList.size());
+		paginationMap.put("total", feedbackList.size());
+		resultMap.put("pagination", paginationMap);
+		return resultMap;
 	}
 
 	@Override

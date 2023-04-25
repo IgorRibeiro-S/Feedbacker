@@ -69,8 +69,8 @@ public class FeedbacksController {
 
 	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@GetMapping(value = "/type")
-	public ResponseEntity<List<Feedbacks>> findByType(@RequestParam String type) {
-		List<Feedbacks> list = feedbackssService.buscarPorTipo(type);
+	public ResponseEntity<?> findByType(@RequestParam String type) {
+		Map<String, Object> list = feedbackssService.buscarPorTipo(type);
 		return ResponseEntity.ok().body(list);
 	}
 
