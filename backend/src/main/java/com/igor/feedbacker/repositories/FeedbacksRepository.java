@@ -15,5 +15,5 @@ public interface FeedbacksRepository extends JpaRepository<Feedbacks, String> {
     //@Query("SELECT f FROM Feedback f WHERE f.usuario = :usuario")
     public List<Feedbacks> findByUserId(String userId);
     
-    public List<Feedbacks> findByTypeAndId(String type, String id);
+    public List<Feedbacks> findByTypeAndIdContains(String type, String id);
 }
