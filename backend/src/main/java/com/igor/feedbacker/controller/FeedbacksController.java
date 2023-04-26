@@ -54,7 +54,7 @@ public class FeedbacksController {
 	@GetMapping
 	public ResponseEntity<?> allFeedbacksById(Authentication auth, Principal principal) {
 		Users usr = repo.findByEmail(auth.getName());
-
+		
 		Map<String, Object> list = feedbackssService.buscarTodosPorId(usr.getId());
 		return ResponseEntity.ok().body(list);
 	}
@@ -70,7 +70,6 @@ public class FeedbacksController {
 	@GetMapping(value = "/type")
 	public ResponseEntity<?> findByType(@RequestParam String type, Authentication auth, Principal principal) {
 		Users usr = repo.findByEmail(auth.getName());
-
 		Map<String, Object> list = feedbackssService.buscarPorTipo(type, usr.getId());
 		return ResponseEntity.ok().body(list);
 	}
