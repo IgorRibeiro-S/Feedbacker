@@ -71,7 +71,8 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 
 	@Override
 	@PreAuthorize("isAuthenticated()")
-	public Map<String, Object> buscarPorTipo(String tipo) {
+	public Map<String, Object> buscarPorTipo(String tipo, String id) {
+		buscarTodosPorId(id);
 		List<Feedbacks> feedbackList = feedbacksRepo.findByTypeContains(tipo.toUpperCase());
 		List<Map<String, Object>> resultList = new ArrayList<>();
 		for (Feedbacks feedback : feedbackList) {

@@ -43,10 +43,10 @@ public class FeedbacksController {
 
 	@Autowired
 	private UsersServiceImpl service;
-	
+
 	@Autowired
 	private UsersRepository repo;
-	
+
 	@Autowired
 	private FeedbacksRepository feedbackRepo;
 
@@ -54,11 +54,10 @@ public class FeedbacksController {
 	@GetMapping
 	public ResponseEntity<?> allFeedbacksById(Authentication auth, Principal principal) {
 		Users usr = repo.findByEmail(auth.getName());
-		
+
 		Map<String, Object> list = feedbackssService.buscarTodosPorId(usr.getId());
 		return ResponseEntity.ok().body(list);
 	}
-	
 
 	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@GetMapping(value = "/{id}")
@@ -69,8 +68,10 @@ public class FeedbacksController {
 
 	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@GetMapping(value = "/type")
-	public ResponseEntity<?> findByType(@RequestParam String type) {
-		Map<String, Object> list = feedbackssService.buscarPorTipo(type);
+	public ResponseEntity<?> findByType(@RequestParam String type, Authentication auth, Principal principal) {
+		Users usr = repo.findByEmail(auth.getName());
+
+		Map<String, Object> list = feedbackssService.buscarPorTipo(type, usr.getId());
 		return ResponseEntity.ok().body(list);
 	}
 
