@@ -4,7 +4,7 @@ import FeedbacksService from './feedbacks'
 const API_ENVS = {
   production: '',
   development: '',
-  local: 'https://backend-treinamento.vercel.app'
+  local: 'https://feedbacker.herokuapp.com'
 }
 
 const httpClient = axios.create({

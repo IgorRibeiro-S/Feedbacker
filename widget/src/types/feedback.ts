@@ -5,5 +5,4 @@ export type Feedback = {
   apiKey: string;
   device: string;
   page: string;
-  createdAt: string;
 }
