@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.igor.feedbacker.entities.Users;
@@ -41,6 +43,15 @@ public class UsersController {
 		usr.setApiKey(apiKey);
 		repo.save(usr);
 		return ResponseEntity.ok().body(apiKey);
+	}
+
+	@RequestMapping(value= "/apikey/exists", method = {RequestMethod.GET, RequestMethod.HEAD})
+	public ResponseEntity<String> apiExists(@RequestParam String id) {
+		if (repo.findById(id) != null) {
+			return ResponseEntity.ok().body("ok");
+
+		}
+		return ResponseEntity.badRequest().body("nenhum Id encontrado");
 	}
 
 }
