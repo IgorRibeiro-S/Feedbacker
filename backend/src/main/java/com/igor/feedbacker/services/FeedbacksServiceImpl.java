@@ -48,7 +48,6 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 	}
 
 	@Override
-	@PreAuthorize("isAuthenticated()")
 	public Feedbacks novoFeedback(Feedbacks obj) {
 		Feedbacks usr = feedbacksRepo.save(obj);
 		return feedbacksRepo.save(usr);
