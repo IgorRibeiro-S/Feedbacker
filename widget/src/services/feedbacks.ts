@@ -30,7 +30,7 @@ function FeedbacksService (httpClient: AxiosInstance): IFeedbackService {
     const response = await httpClient.post<Feedback>('/feedbacks', payload)
     let errors: RequestError | null = null
 
-    if (!response.data) {
+    if (response.status === 400 || response.status === 500 || response.status === 401 || response.status === 403) {
       errors = {
         status: response.request.status,
         statusText: response.request.statusText
