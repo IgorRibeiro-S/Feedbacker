@@ -114,9 +114,10 @@ public class FeedbacksController {
 		return ResponseEntity.noContent().build();
 	}
 
+	@ApiOperation(value = "", authorizations = { @Authorization(value = "Bearer") })
 	@PostMapping
 	public ResponseEntity<Feedbacks> newFeedback(@RequestBody Feedbacks obj) {
-		obj.setIdUser(repo.findByApiKey(obj.getApiKey()).getId());
+		obj.setIdUser(obj.getUser().getId());
 		Users us1 = service.findById(obj.getUser().getId());
 		obj.setApiKey(us1.getApiKey());
 		Feedbacks feedbacks1 = feedbackssService.novoFeedback(obj);
