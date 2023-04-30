@@ -30,7 +30,6 @@ public class UsersServiceImpl implements SegurancaService {
 	}
 
 	@Override
-	@PreAuthorize("isAuthenticated()")
 	public Users findById(String id) {
 		Optional<Users> obj = repository.findById(id);
 		return obj.get();
