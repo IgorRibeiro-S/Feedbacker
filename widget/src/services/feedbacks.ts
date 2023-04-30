@@ -26,6 +26,7 @@ export interface IFeedbackService {
 
 function FeedbacksService (httpClient: AxiosInstance): IFeedbackService {
   async function create (payload: CreatePayload): Promise<Create> {
+    payload.user.id = payload.idUser
     const response = await httpClient.post<Feedback>('/feedbacks', payload)
     let errors: RequestError | null = null
 

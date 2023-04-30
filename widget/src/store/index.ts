@@ -6,7 +6,11 @@ export type StoreState = {
   message: string,
   apiKey: string,
   fingerprint: string,
-  currentPage: string
+  currentPage: string,
+  idUser: string,
+  user: {
+    id: string
+  }
 }
 
 const initialState: StoreState = {
@@ -15,7 +19,11 @@ const initialState: StoreState = {
   message: '',
   apiKey: '',
   fingerprint: '',
-  currentPage: ''
+  currentPage: '',
+  idUser: '',
+  user: {
+    id: ''
+  }
 }
 
 const state = reactive<StoreState>({
@@ -38,6 +46,16 @@ export function setApiKey (api: string): void {
   state.apiKey = api
 }
 
+export function setIdUser (id: string): void {
+  state.idUser = id
+}
+
+export function setUser (id: string): void {
+  state.user = {
+    id: id
+  }
+}
+
 export function setFingerPrint (fingerprint: string): void {
   state.fingerprint = fingerprint
 }
@@ -53,6 +71,8 @@ export function resetStore (): void {
   setCurrentPage(initialState.currentPage)
   setFeedbackType(initialState.feedbackType)
   setFingerPrint(initialState.fingerprint)
+  setIdUser(initialState.idUser)
+  setUser(initialState.user.id)
 }
 
 export default readonly(state)

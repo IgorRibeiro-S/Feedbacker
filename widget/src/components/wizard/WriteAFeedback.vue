@@ -87,7 +87,11 @@ export default defineComponent({
           page: store.currentPage,
           apiKey: store.apiKey,
           device: window.navigator.userAgent,
-          fingerprint: store.fingerprint
+          fingerprint: store.fingerprint,
+          idUser: store.idUser,
+          user: {
+            id: store.idUser
+          }
         })
 
         if (!response.errors) {
