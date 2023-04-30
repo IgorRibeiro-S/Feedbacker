@@ -45,9 +45,9 @@ public class UsersController {
 		return ResponseEntity.ok().body(apiKey);
 	}
 
-	@RequestMapping(value= "/apikey/exists", method = {RequestMethod.GET, RequestMethod.HEAD})
-	public ResponseEntity<String> apiExists(@RequestParam String id) {
-		if (repo.findById(id) != null) {
+	@RequestMapping(value = "/apikey/exists", method = { RequestMethod.GET, RequestMethod.HEAD })
+	public ResponseEntity<String> apiExists(@RequestParam String apiKey) {
+		if (repo.findByApiKey(apiKey) != null) {
 			return ResponseEntity.ok().body("ok");
 
 		}
