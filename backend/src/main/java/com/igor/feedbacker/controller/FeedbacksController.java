@@ -117,8 +117,9 @@ public class FeedbacksController {
 	@PostMapping
 	public ResponseEntity<Feedbacks> newFeedback(@RequestBody Feedbacks obj) {
 		obj.setIdUser(repo.findByApiKey(obj.getApiKey()).getId());
-		Users us1 = service.findById(obj.getUser().getId());
+		Users us1 = service.findById(obj.getIdUser());
 		obj.setApiKey(us1.getApiKey());
+		obj.setUser(us1);
 		Feedbacks feedbacks1 = feedbackssService.novoFeedback(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(feedbacks1.getId())
 				.toUri();
