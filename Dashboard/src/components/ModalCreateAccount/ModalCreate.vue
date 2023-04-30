@@ -75,13 +75,13 @@ import useModal from '../../hooks/useModal'
 import { useField } from 'vee-validate'
 import { validateEmptyAndLength3, validateEmptyAndEmail } from '../../utils/validators'
 import services from '../../services/'
-import { useRouter } from 'vue-router'
+// import { useRouter } from 'vue-router'
 import { useToast } from 'vue-toastification'
 
 export default {
   setup () {
     const modal = useModal()
-    const router = useRouter()
+    // const router = useRouter()
     const toast = useToast()
 
     const {
@@ -118,7 +118,7 @@ export default {
       try {
         toast.clear()
         state.isLoading = true
-        const { data, errors } = await services.auth.register({
+        const { errors } = await services.auth.register({
           name: state.name.value,
           email: state.email.value,
           password: state.password.value,
@@ -126,10 +126,10 @@ export default {
         })
 
         if (!errors || errors.status === 201) {
-          window.localStorage.setItem('token', data.token)
+          // window.localStorage.setItem('token', data.token)
           state.isLoading = false
           toast.success('Cadastro realizado com sucesso')
-          router.push({ name: 'Feedback' })
+          // router.push({ name: 'Feedback' })
           modal.close()
           return
         }

@@ -111,6 +111,8 @@ import { reactive } from '@vue/reactivity'
 import services from '../../services'
 import { setApiKey } from '../../store/users'
 import { watch } from '@vue/runtime-core'
+import { useRouter } from 'vue-router'
+
 export default {
   components: {
     CredencialHeader,
@@ -119,6 +121,7 @@ export default {
   setup () {
     const toast = useToast()
     const store = useStore()
+    const router = useRouter()
     const state = reactive({
       hasErrors: false,
       isLoading: false
@@ -140,6 +143,7 @@ export default {
         const { data } = await services.users.generateApiKey()
         setApiKey(data.apiKey)
         state.isLoading = false
+        router.push({ name: 'Credentials' })
       } catch (error) {
         handleError(error)
       }
