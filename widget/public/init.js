@@ -6,7 +6,7 @@ function init (apiKey) {
   
       const WIDGET_URL = `https://igorribeiro-s-feedbacker-widget.netlify.app?api_key=${apiKey}&page=${page}&fingerprint=${fingerprint.visitorId}`
       const config = { method: 'HEAD' }
-      const res = await fetch(`https://feedbacker.herokuapp.com/user/me/apikey/exists?apiKey=${apiKey}`, config)
+      const res = await httpClient.get(`https://feedbacker.herokuapp.com/user/me/apikey/exists?apiKey=${apiKey}`, config)
   
       if (res.status === 200) {
         const iframe = document.createElement('iframe')
