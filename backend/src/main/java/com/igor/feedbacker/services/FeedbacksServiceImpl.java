@@ -48,6 +48,7 @@ public class FeedbacksServiceImpl implements FeedbacksServicesInterface {
 	}
 
 	@Override
+	@PreAuthorize("permitAll()")
 	public Feedbacks novoFeedback(Feedbacks obj) {
 		Feedbacks usr = feedbacksRepo.save(obj);
 		return feedbacksRepo.save(usr);
