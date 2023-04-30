@@ -14,6 +14,10 @@ type CreatePayload = {
   apiKey: string;
   device: string;
   page: string;
+  idUser: string;
+  user: {
+    id: string;
+  };
 }
 
 export interface IFeedbackService {

@@ -5,4 +5,8 @@ export type Feedback = {
   apiKey: string;
   device: string;
   page: string;
+  idUser: string;
+  user: {
+    id: string;
+  };
 }
