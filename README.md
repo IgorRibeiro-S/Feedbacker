@@ -7,10 +7,10 @@
 <h3 align="justify">
 O Feedbacker é uma plataforma para visualização de feedbacks, onde o usuário disponibiliza um script para seus "clientes" colarem no body da sua aplicação
 o script é um iframe e renderiza Widgets na página do "cliente".
-</h3>
+</h3></b>
+</b>
 
-
-## Tecnologias Utilizadas
+<h1> Tecnologias Utilizadas </h1>
 
 <p align="center">
   <img src="https://img.shields.io/badge/Vue.js-35495E?style=for-the-badge&logo=vuedotjs&logoColor=4FC08D"/>
