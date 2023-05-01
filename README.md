@@ -44,6 +44,14 @@ o script é um iframe e renderiza Widgets na página do "cliente".
 ## Executando o programa 
 Acesse o passo a passo de como utilizar a aplicação: 
 
+Link da plataforma: https://igorribeiro-s-feedbacker-dashboard.netlify.app/
+
+<h3> Visualização dos Feedbacks:</h3>
+<img src="https://user-images.githubusercontent.com/81486915/235406754-bb391527-b296-4cac-b5c0-3818c9880802.gif"/>
+
+<h3> Credenciais e colando script </h3>
+<img src="https://user-images.githubusercontent.com/81486915/235407010-b90c2696-a1ed-4ffe-a355-535185307600.gif"/>
+
 
 
 ## DEV
