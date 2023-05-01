@@ -1,12 +1,13 @@
 
-<h1 align="center">Feedbacker</h1>
+<h1 align="center"><img src="https://user-images.githubusercontent.com/81486915/235407103-fb1d778d-11d7-4d93-aaa7-6e9826ba3c06.png"/></h1>
 
 
-<h3 align="center">Desafio</h3>
-<p align="justify">
+
+<h2 align="center">Desafio</h2>
+<h3 align="justify">
 O Feedbacker é uma plataforma para visualização de feedbacks, onde o usuário disponibiliza um script para seus "clientes" colarem no body da sua aplicação
 o script é um iframe e renderiza Widgets na página do "cliente".
-</p>
+</h3>
 
 
 ## Tecnologias Utilizadas
