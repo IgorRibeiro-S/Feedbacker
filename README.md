@@ -32,21 +32,21 @@ o script é um iframe e renderiza Widgets na página do "cliente".
 
 ### 📌 Requisitos Funcionais
 
-#### Aplicação 1:
+#### Aplicação:
 
- - Construir uma aplicação que rodará servidor local para configuração e parametrização do serviço.
- - Nessa aplicação, criar tela para configuração do sistema (com todas as configurações que a aplicação atual já tem) incluindo também a limitação de consumo de banda de rede e tempo para verificação de novos arquivos para download
- - Criar também, tela para configuração da conta de acesso a api (guardar de um jeito seguro).
- - Emitir alerta no S.O. avisando que novos arquivos foram baixados
- - Criar tela de histórico de arquivos baixados
+ - Construir uma aplicação SPA responsiva.
+ - A aplicação terá a plataforma principal e widgets.
+ - A aplicação será full stack (back e front).
+ - Também deverá estar em deploy para testes.
+ - Modelo seguro com senha criptografada no BD.
 
 
 ## Executando o programa 
-Acesse o passo a passo de como utilizar a aplicação:  [AQUI](https://github.com/PhatomFatec/datatransfer-back/blob/main/Readme.md).
+Acesse o passo a passo de como utilizar a aplicação: 
 
 
 
-## Desenvolvedor
+## DEV
 
 * **DEV** - Igor Ribeiro Silva &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;&nbsp; 
 [<img src="https://img.shields.io/badge/linkedin-%230077B5.svg?&style=for-the-badge&logo=linkedin&logoColor=white&color=black"/>](https://www.linkedin.com/in/igor-ribeiro-8571a6210/)
